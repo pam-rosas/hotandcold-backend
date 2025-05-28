@@ -2,15 +2,21 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 require('dotenv').config();
-const verifyToken = require('./middlewares/verifyToken');
 
+
+
+const verifyToken = require('./middlewares/verifyToken');
+const authRoutes = require('./routes/auth');
 const { db } = require('./config/firebaseAdmin'); // Importa Firestore desde el archivo que creaste
 
 const app = express();
+
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); // <-- Esto primero
+app.use('/api', authRoutes);
+
 
 app.post('/api/contact', async (req, res) => {
   const { nombre, apellido, email, telefono, direccion, rol } = req.body;
@@ -153,34 +159,7 @@ app.post('/api/contact-footer', async (req, res) => {
   }
 });
 
-app.post('/api/login', async (req, res) => {
-  const { username, password } = req.body;
 
-  try {
-    // Buscar usuario en Firestore por username
-    const userQuery = await db.collection('usuarios').where('username', '==', username).limit(1).get();
-
-    if (userQuery.empty) {
-      return res.status(401).json({ message: 'Usuario no encontrado' });
-    }
-
-    const userDoc = userQuery.docs[0];
-    const userData = userDoc.data();
-
-    // Comparar password (hasheado) con bcrypt
-    const validPassword = await bcrypt.compare(password, userData.password);
-    if (!validPassword) {
-      return res.status(401).json({ message: 'Contraseña incorrecta' });
-    }
-
-    // Si pasa todo, responder OK (aquí podrías crear un token JWT si quieres)
-    res.json({ message: 'Login exitoso', username: userData.username });
-
-  } catch (error) {
-    console.error('Error en login:', error);
-    res.status(500).json({ message: 'Error en servidor' });
-  }
-});
 
 app.listen(PORT, () => {
   console.log(`Servidor backend escuchando en http://localhost:${PORT}`);

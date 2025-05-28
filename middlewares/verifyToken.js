@@ -1,5 +1,6 @@
 // backend/middlewares/verifyToken.js
-const admin = require("../firebaseAdmin"); // Ajusta la ruta si tu firebaseAdmin está en otro lado
+const admin = require("../config/firebaseAdmin");
+
 
 async function verifyToken(req, res, next) {
   const authHeader = req.headers.authorization;
