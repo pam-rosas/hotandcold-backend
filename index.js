@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5000;
 
 
 app.use(cors({
-  origin: 'https://hotandcold.onrender.com' // dominio de tu frontend
+  origin: 'https://hotandcold-backend.onrender.com' // dominio de tu frontend
 }));
 app.use(express.json()); // <-- Esto primero
 app.use('/api', authRoutes);
