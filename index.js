@@ -14,11 +14,14 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 
-app.use(cors({
-  origin: 'https://hotandcold-backend.onrender.com' // dominio de tu frontend
-}));
 app.use(express.json()); // <-- Esto primero
 app.use('/api', authRoutes);
+
+app.use(cors({
+  origin: 'https://hotandcold.onrender.com', // tu frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true // si usas cookies o autenticación
+}));
 
 
 
