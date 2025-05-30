@@ -3,27 +3,24 @@ const nodemailer = require('nodemailer');
 const cors = require('cors');
 require('dotenv').config();
 
-
-
 const verifyToken = require('./middlewares/verifyToken');
 const authRoutes = require('./routes/auth');
 const { db } = require('./config/firebaseAdmin'); // Importa Firestore desde el archivo que creaste
 
 const app = express();
-
 const PORT = process.env.PORT || 5000;
 
+// Middlewares globales
+app.use(express.json()); // Parseo de JSON
 
-app.use(express.json()); // <-- Esto primero
-app.use('/api', authRoutes);
-
+// Configurar CORS antes de las rutas
 app.use(cors({
   origin: 'https://hotandcold.onrender.com', // tu frontend
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  credentials: true // si usas cookies o autenticación
+  credentials: true
 }));
 
-
+app.use('/api', authRoutes);
 
 app.post('/api/contact', async (req, res) => {
   const { nombre, apellido, email, telefono, direccion, rol } = req.body;
