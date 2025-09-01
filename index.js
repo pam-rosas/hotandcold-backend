@@ -5,10 +5,6 @@ const cors = require('cors');
 require('dotenv').config();
 const admin = require('firebase-admin');
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
-
 const db = admin.firestore();
 
 const verifyToken = require('./middlewares/verifyToken');
