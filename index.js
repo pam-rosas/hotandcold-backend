@@ -1,3 +1,4 @@
+const PORT = process.env.PORT || 5000;
 const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
@@ -19,13 +20,6 @@ app.use(express.json()); // Parseo de JSON
 // Configurar CORS antes de las rutas
 
 app.use(cors({
-  origin: ['https://www.hotandcold.cl', 'https://hotandcold.onrender.com'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  credentials: true
-}));
-
-// Responder manualmente a las solicitudes OPTIONS (preflight)
-app.options('*', cors({
   origin: ['https://www.hotandcold.cl', 'https://hotandcold.onrender.com'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true
