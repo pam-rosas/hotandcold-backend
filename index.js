@@ -1,6 +1,7 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
+const admin = require('firebase-admin');
 require('dotenv').config();
 
 const verifyToken = require('./middlewares/verifyToken');
