@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json()); // Parseo de JSON
 
 // Configurar CORS antes de las rutas
-const allowedOrigins = ['https://www.hotandcold.cl', 'https://hotandcold.onrender.com'];
+const allowedOrigins = ['https://www.hotandcold.cl/', 'https://hotandcold.onrender.com/'];
 
 app.use(cors({
   origin: (origin, callback) => {
