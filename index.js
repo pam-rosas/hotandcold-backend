@@ -15,27 +15,16 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json()); // Parseo de JSON
 
 // Configurar CORS antes de las rutas
-const allowedOrigins = ['https://www.hotandcold.cl/', 'https://hotandcold.onrender.com/'];
+const allowedOrigins = ['https://www.hotandcold.cl', 'https://hotandcold.onrender.com'];
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
+
   },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true
 }));
-
-
-app.options('*', cors({
-  origin: ['https://www.hotandcold.cl', 'https://hotandcold.onrender.com'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  credentials: true
-}));
-
 
 
 app.use('/api', authRoutes);
