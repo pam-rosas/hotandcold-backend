@@ -10,6 +10,12 @@ const { db } = require('./config/firebaseAdmin'); // Importa Firestore desde el 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+
+admin.initializeApp({
+  credential: admin.credential.cert(require('./hotandcold-15168-firebase-adminsdk-fbsvc-8f106b30ec.json')),
+  databaseURL: 'https://console.firebase.google.com/project/hotandcold-15168/firestore/databases/-default-/data'
+});
+
 // Middlewares globales
 app.use(express.json()); // Parseo de JSON
 
