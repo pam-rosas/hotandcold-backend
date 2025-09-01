@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer');
 const cors = require('cors');
 require('dotenv').config();
 const admin = require('firebase-admin');
-const serviceAccount = require('../hotandcold-15168-firebase-adminsdk-fbsvc-8f106b30ec.json');
+const serviceAccount = require('./hotandcold-15168-firebase-adminsdk-fbsvc-8f106b30ec.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
