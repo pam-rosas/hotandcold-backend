@@ -1,17 +1,20 @@
-const PORT = process.env.PORT || 5000;
+
 const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 require('dotenv').config();
 const admin = require('firebase-admin');
+const serviceAccount = require('./hotandcold-15168-firebase-adminsdk-fbsvc-8f106b30ec.json');
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
 
 const db = admin.firestore();
 
+const PORT = process.env.PORT || 5000;
 const verifyToken = require('./middlewares/verifyToken');
 const authRoutes = require('./routes/auth');
-
-
-// La inicialización de Firebase Admin se realiza en config/firebaseAdmin.js
 
 const app = express(); // Definir la instancia de Express
 
