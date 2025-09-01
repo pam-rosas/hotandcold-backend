@@ -11,6 +11,8 @@ const { db } = require('./config/firebaseAdmin'); // Importa Firestore desde el 
 
 // La inicialización de Firebase Admin se realiza en config/firebaseAdmin.js
 
+const app = express(); // Definir la instancia de Express
+
 // Middlewares globales
 app.use(express.json()); // Parseo de JSON
 
