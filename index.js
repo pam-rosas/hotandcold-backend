@@ -4,10 +4,16 @@ const nodemailer = require('nodemailer');
 const cors = require('cors');
 require('dotenv').config();
 const admin = require('firebase-admin');
+const serviceAccount = require('../hotandcold-15168-firebase-adminsdk-fbsvc-8f106b30ec.json');
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+
+const db = admin.firestore();
 
 const verifyToken = require('./middlewares/verifyToken');
 const authRoutes = require('./routes/auth');
-const { db } = require('./config/firebaseAdmin'); // Importa Firestore desde el archivo que creaste
 
 
 // La inicialización de Firebase Admin se realiza en config/firebaseAdmin.js
@@ -20,7 +26,8 @@ app.use(express.json()); // Parseo de JSON
 // Configurar CORS antes de las rutas
 
 app.use(cors({
-  origin: ['https://www.hotandcold.cl', 'https://hotandcold.onrender.com'],
+
+  origin: ['https://www.hotandcold.cl', 'https://hotandcold.onrender.com', 'http://localhost:3000'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true
 }));
