@@ -9,11 +9,7 @@ const authRoutes = require('./routes/auth');
 const { db } = require('./config/firebaseAdmin'); // Importa Firestore desde el archivo que creaste
 
 
-// Inicializar Firebase Admin SOLO UNA VEZ
-admin.initializeApp({
-  credential: admin.credential.cert(require('./hotandcold-15168-firebase-adminsdk-fbsvc-8f106b30ec.json')),
-  databaseURL: 'https://hotandcold-15168.firebaseio.com'
-});
+// La inicialización de Firebase Admin se realiza en config/firebaseAdmin.js
 
 // Middlewares globales
 app.use(express.json()); // Parseo de JSON
