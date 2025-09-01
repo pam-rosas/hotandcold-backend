@@ -30,6 +30,14 @@ app.use(cors({
 }));
 
 
+app.options('*', cors({
+  origin: ['https://www.hotandcold.cl', 'https://hotandcold.onrender.com'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true
+}));
+
+
+
 app.use('/api', authRoutes);
 
 app.post('/api/contact', async (req, res) => {
